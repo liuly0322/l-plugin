@@ -1,0 +1,13 @@
+{
+  "name": "l-plugin",
+  "version": "1.0.0",
+  "description": "Plugin for Yunzai-bot",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Liangyu Liu",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
