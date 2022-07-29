@@ -27,7 +27,7 @@ L-Plugin 需要最新版本的 Yunzai-Bot，请确认 Yunzai-Bot 已升级至最
 
 ```
 // 使用github
-git clone https://github.com/yoimiya-kokomi/L-plugin.git ./plugins/l-plugin/
+git clone https://github.com/liuly0322/l-plugin.git ./plugins/l-plugin/
 ```
 
 随后进入本插件的文件夹，使用 `pnpm` 安装依赖：
