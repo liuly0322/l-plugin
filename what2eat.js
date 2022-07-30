@@ -149,9 +149,9 @@ export class what2eat extends plugin {
   async validate() {
     if (!this.e.isGroup) {
       this.reply('请群聊发送')
-      return False
+      return false
     }
-    return True
+    return true
   }
   
   getKey () {
@@ -184,8 +184,8 @@ export class what2eat extends plugin {
       const key = this.getKey()
       const group_food = await redis.sMembers(key)
       food = this.e.msg.split(' ')[0]?.includes('咱')
-      ? group_food
-      : [...basic_food, ...group_food]
+        ? group_food
+        : [...basic_food, ...group_food]
     }
     
 
