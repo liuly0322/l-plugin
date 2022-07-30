@@ -61,6 +61,8 @@ export class dailyLeetCode extends plugin {
       tplFile: `${__dirname}/dailyLeetCode.html`,
     }
 
+    await this.reply(problem_url)
+
     let img = await puppeteer.screenshot('dailyLeetCode', data)
     await this.reply(img)
   }
