@@ -127,7 +127,7 @@ export class what2eat extends plugin {
     super({
       name: 'what2eat',
       dsc: '今天吃什么',
-      event: 'message.group',
+      event: 'message',
       priority: 5000,
       rule: [
         {
@@ -145,9 +145,22 @@ export class what2eat extends plugin {
       ],
     })
   }
-
+  
+  async validate() {
+    if (!this.e.isGroup) {
+      this.reply('请群聊发送')
+      return False
+    }
+    return True
+  }
+  
+  getKey () {
+    return `Yz:what2eat:foods:${this.e.group_id}`
+  }
+  
   async addFood() {
-    const key = `Yz:what2eat:foods:${this.e.group_id}`
+    if (!this.validate()) return
+    const key = this.getKey()
     const foods = this.e.msg.split(' ').slice(1)
     foods.forEach(async (food) => {
       await redis.sAdd(key, food)
@@ -156,7 +169,8 @@ export class what2eat extends plugin {
   }
 
   async deleteFood() {
-    const key = `Yz:what2eat:foods:${this.e.group_id}`
+    if (!this.validate()) return
+    const key = this.getKey()
     const foods = this.e.msg.split(' ').slice(1)
     foods.forEach(async (food) => {
       await redis.sRem(key, food)
@@ -165,11 +179,15 @@ export class what2eat extends plugin {
   }
 
   async what2eat() {
-    const key = `Yz:what2eat:foods:${this.e.group_id}`
-    const group_food = await redis.sMembers(key)
-    const food = this.e.msg.split(' ')[0]?.includes('咱')
+    let food = basic_food
+    if (this.validate()) {
+      const key = this.getKey()
+      const group_food = await redis.sMembers(key)
+      food = this.e.msg.split(' ')[0]?.includes('咱')
       ? group_food
       : [...basic_food, ...group_food]
+    }
+    
 
     if (!food || food.length == 0) return
 
