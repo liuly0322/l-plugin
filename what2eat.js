@@ -145,21 +145,15 @@ export class what2eat extends plugin {
       ],
     })
   }
-  
-  async validate() {
-    if (!this.e.isGroup) {
-      this.reply('请群聊发送')
-      return false
-    }
-    return true
-  }
-  
+    
   getKey () {
     return `Yz:what2eat:foods:${this.e.group_id}`
   }
   
   async addFood() {
-    if (!this.validate()) return
+    if (!this.e.isGroup) {
+      return await this.reply("请群聊发送")
+    }
     const key = this.getKey()
     const foods = this.e.msg.split(' ').slice(1)
     foods.forEach(async (food) => {
@@ -169,7 +163,9 @@ export class what2eat extends plugin {
   }
 
   async deleteFood() {
-    if (!this.validate()) return
+    if (!this.e.isGroup) {
+      return await this.reply("请群聊发送")
+    }
     const key = this.getKey()
     const foods = this.e.msg.split(' ').slice(1)
     foods.forEach(async (food) => {
@@ -180,7 +176,7 @@ export class what2eat extends plugin {
 
   async what2eat() {
     let food = basic_food
-    if (this.validate()) {
+    if (this.e.isGroup) {
       const key = this.getKey()
       const group_food = await redis.sMembers(key)
       food = this.e.msg.split(' ')[0]?.includes('咱')
