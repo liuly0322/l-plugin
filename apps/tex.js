@@ -17,7 +17,7 @@ export class tex extends plugin {
       priority: 100,
       rule: [
         {
-          reg: '^tex\\s$',
+          reg: '^tex\\s',
           fnc: 'render'
         }
       ]
