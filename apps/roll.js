@@ -1,7 +1,7 @@
-import plugin from '../../lib/plugins/plugin.js'
+import plugin from '../../../lib/plugins/plugin.js'
 
 export class dice extends plugin {
-  constructor() {
+  constructor () {
     super({
       name: 'roll',
       dsc: 'roll骰子',
@@ -10,23 +10,23 @@ export class dice extends plugin {
       rule: [
         {
           reg: '^#?roll ',
-          fnc: 'roll',
+          fnc: 'roll'
         },
         {
           reg: '^#?r ',
-          fnc: 'r',
-        },
-      ],
+          fnc: 'r'
+        }
+      ]
     })
   }
 
-  async roll() {
+  async roll () {
     const choices = this.e.msg.split(' ').slice(1)
     const result = choices[Math.floor(Math.random() * choices.length)]
     await this.reply(`bot帮你选择：${result}`, false, { at: true })
   }
 
-  async r() {
+  async r () {
     const range = this.e.msg.split(' ').slice(1)
     const end = parseInt(range.pop() ?? 100) || 100
     const start = parseInt(range.pop() ?? 1) || 1

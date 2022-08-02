@@ -1,11 +1,9 @@
 import { segment } from 'oicq'
-import plugin from '../../lib/plugins/plugin.js'
-import tarots from './tarot.json' assert { type: 'json' }
-
-const cards = tarots['cards']
+import plugin from '../../../lib/plugins/plugin.js'
+import cards from '../data/tarot.js'
 
 export class tarot extends plugin {
-  constructor() {
+  constructor () {
     super({
       name: 'tarot',
       dsc: '塔罗牌',
@@ -14,28 +12,28 @@ export class tarot extends plugin {
       rule: [
         {
           reg: '^#?塔罗牌',
-          fnc: 'tarot',
-        },
-      ],
+          fnc: 'tarot'
+        }
+      ]
     })
   }
 
-  async tarot() {
-    const card = cards[String(Math.floor(Math.random() * 77))]
-    const name = card['name_cn']
-    const is_up = Math.random() > 0.5
+  async tarot () {
+    const card = cards[Math.floor(Math.random() * 77)]
+    const name = card.name_cn
+    const isUp = Math.random() > 0.5
     await this.reply(
-      `\n「${is_up ? '正位' : '逆位'}」${name}\n回应是：${
-        is_up ? card['meaning']['up'] : card['meaning']['down']
+      `\n「${isUp ? '正位' : '逆位'}」${name}\n回应是：${
+        isUp ? card.meaning.up : card.meaning.down
       }`,
       false,
       { at: true }
     )
     const path =
       'https://fastly.jsdelivr.net/gh/MinatoAquaCrews/nonebot_plugin_tarot@beta/nonebot_plugin_tarot/resource/' +
-      card['type'] +
+      card.type +
       '/' +
-      card['pic']
+      card.pic
     const pic = segment.image(encodeURI(path))
     await this.reply(pic)
   }

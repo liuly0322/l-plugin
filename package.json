@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
+  "module": "index.js",
   "author": "Liangyu Liu",
   "license": "MIT",
   "dependencies": {

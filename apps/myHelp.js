@@ -1,4 +1,4 @@
-import plugin from '../../lib/plugins/plugin.js'
+import plugin from '../../../lib/plugins/plugin.js'
 
 const content =
   '原神Yunzai-bot plus\n' +
@@ -10,7 +10,7 @@ const content =
   '「云崽/喵喵帮助」原神bot功能'
 
 export class myHelp extends plugin {
-  constructor() {
+  constructor () {
     super({
       name: '我的帮助',
       dsc: '发送帮助信息',
@@ -19,13 +19,13 @@ export class myHelp extends plugin {
       rule: [
         {
           reg: '^help$',
-          fnc: 'help',
-        },
-      ],
+          fnc: 'help'
+        }
+      ]
     })
   }
 
-  async help() {
+  async help () {
     await this.reply(content, false)
   }
 }
