@@ -29,9 +29,9 @@ export class tex extends plugin {
     const texHtml = katex.renderToString(formula, { throwOnError: false })
     let data = {
       texHtml,
-      tplFile: `${__dirname}/dailyLeetCode.html`
+      tplFile: `${__dirname}/tex.html`
     }
-    let img = await puppeteer.screenshot('dailyLeetCode', data)
+    let img = await puppeteer.screenshot('tex', data)
     await this.reply(img)
   }
 }
