@@ -1,4 +1,5 @@
 import { segment } from 'oicq'
+import lodash from 'lodash'
 import plugin from '../../../lib/plugins/plugin.js'
 import cards from '../data/tarot.js'
 
@@ -19,9 +20,9 @@ export class tarot extends plugin {
   }
 
   async tarot () {
-    const card = cards[Math.floor(Math.random() * 77)]
+    const card = lodash.sample(cards)
     const name = card.name_cn
-    const isUp = Math.random() > 0.5
+    const isUp = lodash.random(0, 1)
     await this.reply(
       `\n「${isUp ? '正位' : '逆位'}」${name}\n回应是：${
         isUp ? card.meaning.up : card.meaning.down

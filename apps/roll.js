@@ -1,4 +1,5 @@
 import plugin from '../../../lib/plugins/plugin.js'
+import lodash from 'lodash'
 
 export class dice extends plugin {
   constructor () {
@@ -22,7 +23,7 @@ export class dice extends plugin {
 
   async roll () {
     const choices = this.e.msg.split(' ').slice(1)
-    const result = choices[Math.floor(Math.random() * choices.length)]
+    const result = lodash.sample(choices)
     await this.reply(`bot帮你选择：${result}`, false, { at: true })
   }
 
@@ -30,7 +31,7 @@ export class dice extends plugin {
     const range = this.e.msg.split(' ').slice(1)
     const end = parseInt(range.pop() ?? 100) || 100
     const start = parseInt(range.pop() ?? 1) || 1
-    const result = Math.floor(Math.random() * (end - start + 1) + start)
+    const result = lodash.random(start, end);
     await this.reply(`在${start}和${end}间roll到了：${result}`)
   }
 }

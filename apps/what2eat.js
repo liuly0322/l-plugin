@@ -1,3 +1,4 @@
+import lodash from 'lodash'
 import plugin from '../../../lib/plugins/plugin.js'
 import basicFood from '../data/foods.js'
 
@@ -65,10 +66,7 @@ export class what2eat extends plugin {
 
     if (!food || food.length == 0) return
 
-    const results = new Array(5)
-      .fill('')
-      .map(() => food[Math.floor(Math.random() * food.length)])
-    const result = results.join('|')
-    await this.reply(`推荐尝试：${result}`, false, { at: true })
+    const result = lodash.sampleSize(food, 5).join('|')
+    await this.reply(`🌟推荐尝试：${result}`, false, { at: true })
   }
 }
