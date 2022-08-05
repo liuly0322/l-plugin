@@ -2,9 +2,10 @@ import plugin from '../../../lib/plugins/plugin.js'
 import lodash from 'lodash'
 import fs from 'node:fs'
 import crypto from 'node:crypto'
-const util = require('util')
-const exec = util.promisify(require('child_process').exec)
+import util from 'node:util'
+import childProcess from 'node:child_process'
 
+const execPromise = util.promisify(childProcess.exec)
 const fsPromises = fs.promises
 
 export class python extends plugin {
@@ -35,7 +36,7 @@ export class python extends plugin {
     const fileName = this.path + '/' + crypto.randomUUID()
     await fsPromises.writeFile(fileName, code)
     try {
-      const { stdout } = await exec(`sudo docker run -i --rm ubuntu-python-playground-img < ${fileName}`)
+      const { stdout } = await execPromise(`sudo docker run -i --rm ubuntu-python-playground-img < ${fileName}`)
       if (stdout) {
         let result = lodash.truncate(stdout, { length: 100 })
         await this.reply(result)
