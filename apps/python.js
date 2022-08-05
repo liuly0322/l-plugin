@@ -32,7 +32,7 @@ export class python extends plugin {
   }
 
   async eval () {
-    const code = this.e.msg.slice(4)
+    const code = this.e.msg.slice(7)
     const fileName = this.path + '/' + crypto.randomUUID()
     await fsPromises.writeFile(fileName, code)
     try {
