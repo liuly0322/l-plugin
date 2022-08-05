@@ -17,6 +17,7 @@ L-Plugin 是一个 Yunzai-Bot 的偏向正常 QQ 机器人的功能插件
 - 「添加/删除食物」更改群菜单
   - 通过使用 Redis 数据库实现
 - 「tex」生成公式对应图片
+- 「python」隔离运行代码
 
 ## 使用说明
 
@@ -36,6 +37,13 @@ git clone https://github.com/liuly0322/l-plugin.git ./plugins/l-plugin/
 ```
 cd plugins/l-plugin
 pnpm install
+```
+
+如果需要支持运行 python，继续执行:
+
+```
+cd docker
+sudo docker build -t ubuntu-python-playground-img .
 ```
 
 # 免责声明
