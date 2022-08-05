@@ -36,10 +36,11 @@ export class python extends plugin {
     const fileName = this.path + '/' + crypto.randomUUID()
     await fsPromises.writeFile(fileName, code)
     try {
-      const { stdout } = await execPromise(`sudo docker run -i --rm ubuntu-python-playground-img < ${fileName}`)
+      let { stdout } = await execPromise(`sudo docker run -i --rm ubuntu-python-playground-img < ${fileName}`)
+      stdout = lodash.trim(stdout)
       if (stdout) {
-        let result = lodash.truncate(stdout, { length: 100 })
-        await this.reply(result)
+        stdout = lodash.truncate(stdout, { length: 100 })
+        await this.reply(stdout)
       } else {
         await this.reply('无标准输出内容！')
       }
