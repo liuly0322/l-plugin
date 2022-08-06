@@ -29,8 +29,8 @@ export class dice extends plugin {
 
   async r () {
     const range = this.e.msg.split(' ').slice(1)
-    const end = parseInt(range.pop() ?? 100) || 100
-    const start = parseInt(range.pop() ?? 1) || 1
+    const end = parseInt(range.pop() ?? 100) || 0
+    const start = parseInt(range.pop() ?? 1) || 0
     const result = lodash.random(start, end);
     await this.reply(`在${start}和${end}间roll到了：${result}`)
   }
