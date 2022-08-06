@@ -55,13 +55,12 @@ export class dailyLeetCode extends plugin {
       titleCn,
       level,
       context,
-      problemUrl,
       tplFile: `${__dirname}/dailyLeetCode.html`
     }
 
-    await this.reply(problemUrl)
-
     let img = await puppeteer.screenshot('dailyLeetCode', data)
     await this.reply(img)
+    
+    await this.reply(problemUrl)
   }
 }
