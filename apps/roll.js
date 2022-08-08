@@ -21,14 +21,14 @@ export class dice extends plugin {
     })
   }
 
-  async roll (e) {
-    const choices = e.msg.split(' ').slice(1)
+  async roll () {
+    const choices = this.e.msg.split(' ').slice(1)
     const result = lodash.sample(choices)
     await this.reply(`bot帮你选择：${result}`, false, { at: true })
   }
 
-  async r (e) {
-    const range = e.msg.split(' ').map(parseInt).filter(Boolean)
+  async r () {
+    const range = this.e.msg.split(' ').map(parseInt).filter(Boolean)
     const end = range.pop() ?? 100
     const start = range.pop() ?? 1
     const result = lodash.random(start, end);
