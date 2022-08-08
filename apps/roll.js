@@ -28,7 +28,7 @@ export class dice extends plugin {
   }
 
   async r () {
-    const range = this.e.msg.split(' ').map(parseInt).filter(Boolean)
+    const range = this.e.msg.split(' ').map(Number).filter(Boolean)
     const end = range.pop() ?? 100
     const start = range.pop() ?? 1
     const result = lodash.random(start, end);
