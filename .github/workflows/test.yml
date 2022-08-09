@@ -32,4 +32,4 @@ jobs:
         run: docker exec yunzai-bot sh test.sh
 
       - name: check log
-        run: sh -c "! grep -rq 'ERRO' ./yunzai/logs"
+        run: sh -c "! grep -rq 'ERRO' ./test/yunzai/logs"
