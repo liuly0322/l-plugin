@@ -50,7 +50,11 @@ export class kauChim extends plugin {
       this.reply('（今天已经抽过了，明天再来看看吧…）')
       return
     }
-    await this.reply(`${card?.name}\n${card?.dsc}`, false, { at: true })
+    let msg = `${card?.name}\n${card?.dsc}`
+    if (this.e.isGroup) {
+      msg = '\n' + msg
+    }
+    await this.reply(msg, false, { at: true })
     if (card?.item) {
       this.reply(card?.item)
     }
