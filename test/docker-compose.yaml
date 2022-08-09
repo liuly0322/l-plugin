@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  yunzai-bot:
+    container_name: yunzai-bot
+    image: sirly/yunzai-bot:dev
+    restart: always
+    volumes:
+      - ./yunzai/config/:/app/Yunzai-Bot/config/config/
+      - ./yunzai/logs:/app/Yunzai-Bot/logs
+      - ./yunzai/data:/app/Yunzai-Bot/data
+      - ../:/app/Yunzai-Bot/plugins/l-plugin
+    depends_on:
+      redis: { condition: service_healthy }
+
+  redis:
+    container_name: yunzai-redis
+    image: 'redis:alpine'
+    restart: always
+    volumes:
+      - ./redis/data:/data
+      - ./redis/logs:/logs
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'PING']
+      start_period: 10s
+      interval: 5s
+      timeout: 1s

@@ -1,0 +1,25 @@
+name: yunzai test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install dependencies
+        run: sudo apt install docker-compose
+
+      - name: pull docker images
+        run: cd test && docker-compose up -d
+
+      - name: use default config
+        run: docker cp test/qq.yaml yunzai-bot:/app/Yunzai-Bot/config/config
+
+      - name: run test script
+        run: docker exec yunzai-bot npm run test
