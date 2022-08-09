@@ -23,9 +23,9 @@ export class kauChim extends plugin {
   get key () {
     /** 群，私聊分开 */
     if (this.e.isGroup) {
-      return `${this.prefix}${this.e.group_id}:${this.userId}`
+      return `${this.prefix}${this.e.group_id}:${this.e.user_id}`
     } else {
-      return `${this.prefix}private:${this.userId}`
+      return `${this.prefix}private:${this.e.user_id}`
     }
   }
 
