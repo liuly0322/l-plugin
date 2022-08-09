@@ -29,8 +29,7 @@ jobs:
         run: docker cp test/test.sh yunzai-bot:/app/Yunzai-Bot
 
       - name: run test script
-        run: |
-          docker exec yunzai-bot sh test.sh
+        run: docker exec yunzai-bot sh test.sh
 
       - name: check log
-        run: sh -c "! grep -rq 'ERRO' ./logs"
+        run: sh -c "! grep -rq 'ERRO' ./yunzai/logs"
