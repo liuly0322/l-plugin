@@ -11,15 +11,15 @@ export class what2eat extends plugin {
       priority: 5000,
       rule: [
         {
-          reg: '^咱?(今天|明天|[早中午晚][上饭餐午]|早上|夜宵|今晚)吃(什么|啥|点啥)',
+          reg: '^#?咱?(今天|明天|[早中午晚][上饭餐午]|早上|夜宵|今晚)吃(什么|啥|点啥)',
           fnc: 'what2eat'
         },
         {
-          reg: '^添加食物',
+          reg: '^#?添加食物',
           fnc: 'addFood'
         },
         {
-          reg: '^删除食物',
+          reg: '^#?删除食物',
           fnc: 'deleteFood'
         }
       ]

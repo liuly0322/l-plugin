@@ -31,7 +31,7 @@ export class dice extends plugin {
     const range = this.e.msg.split(' ').map(Number).filter(Number.isInteger)
     const end = range.pop() ?? 100
     const start = range.pop() ?? 1
-    const result = lodash.random(start, end);
+    const result = lodash.random(start, end)
     await this.reply(`在${start}和${end}间roll到了：${result}`)
   }
 }

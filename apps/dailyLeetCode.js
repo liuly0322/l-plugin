@@ -19,7 +19,7 @@ export class dailyLeetCode extends plugin {
       priority: 300,
       rule: [
         {
-          reg: '^每日一题$',
+          reg: '^#?每日一题$',
           fnc: 'dailyLeetCode'
         }
       ]
@@ -60,7 +60,7 @@ export class dailyLeetCode extends plugin {
 
     let img = await puppeteer.screenshot('dailyLeetCode', data)
     await this.reply(img)
-    
+
     await this.reply(problemUrl)
   }
 }
