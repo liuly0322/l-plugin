@@ -1,7 +1,7 @@
 import lodash from 'lodash'
 import moment from 'moment'
 import plugin from '../../../lib/plugins/plugin.js'
-import cards from '../data/kau_chim.js'
+import cards from '../data/kauChim.js'
 
 export class kauChim extends plugin {
   constructor () {
