@@ -29,7 +29,7 @@ jobs:
         run: docker cp test/test.sh yunzai-bot:/app/Yunzai-Bot
 
       - name: run test script
-        run: docker exec yunzai-bot sh test.sh && chmod -R 777 ./test/yunzai/logs
+        run: docker exec yunzai-bot sh test.sh && sudo chown -R $(whoami) && sudo chmod -R 777 ./test/yunzai/logs
 
       - name: check log
         run: sh -c "! grep -rq 'ERRO' ./test/yunzai/logs"
