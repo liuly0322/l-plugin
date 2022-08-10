@@ -8,7 +8,9 @@ import { dirname } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const md = new MarkdownIt()
+const md = new MarkdownIt({
+  html: true
+})
 
 export class markdown extends plugin {
   constructor () {
