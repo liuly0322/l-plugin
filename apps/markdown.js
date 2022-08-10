@@ -1,6 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import puppeteer from '../../../lib/puppeteer/puppeteer.js'
-import katex from 'katex'
+import MarkdownIt from 'markdown-it'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -8,16 +8,18 @@ import { dirname } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-export class tex extends plugin {
+const md = new MarkdownIt()
+
+export class markdown extends plugin {
   constructor () {
     super({
-      name: 'tex 公式转换',
-      dsc: '利用 katex 渲染 tex 公式',
+      name: 'markdown 转换',
+      dsc: '渲染 markdown 文本',
       event: 'message',
       priority: 100,
       rule: [
         {
-          reg: '^#?tex\\s',
+          reg: '^#?markdown\\s',
           fnc: 'render'
         }
       ]
@@ -25,13 +27,13 @@ export class tex extends plugin {
   }
 
   async render () {
-    const formula = this.e.msg.split(/(?<=^\S+)\s/).pop()
-    const texHtml = katex.renderToString(formula, { throwOnError: false })
+    const text = this.e.msg.split(/(?<=^\S+)\s/).pop()
+    const markdownHtml = md.render(text)
     let data = {
-      texHtml,
-      tplFile: `${__dirname}/tex.html`
+      markdownHtml,
+      tplFile: `${__dirname}/markdown.html`
     }
-    let img = await puppeteer.screenshot('tex', data)
+    let img = await puppeteer.screenshot('markdown', data)
     await this.reply(img)
   }
 }

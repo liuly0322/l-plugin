@@ -11,6 +11,7 @@ const content =
   '「(咱)今天吃什么」美食推荐\n' +
   '「添加/删除食物」更改群菜单\n' +
   '「tex」生成公式对应图片\n' +
+  '「markdown」同上\n' +
   '「python」执行 python 代码\n' +
   '「求签」来鸣神大社抽签\n' +
   '「云崽/喵喵帮助」原神bot功能\n' + (masterQQ ? `联系：${masterQQ}` : '')
