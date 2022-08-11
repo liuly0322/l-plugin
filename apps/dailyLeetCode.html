@@ -4,13 +4,41 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#" />
+    <style>
+        pre {
+            background: rgba(0,10,32,0.05);
+            padding: 10px 15px;
+            line-height: 1.6;
+            border-radius: 3px;
+            white-space: pre-wrap;
+        }
+        code {
+            background: rgba(0,10,32,0.05);
+            color: rgba(89,89,89,1);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .Easy {
+            color: rgb(90,183,38);
+        }
+        .Medium {
+            color: rgb(255,161,25);
+        }
+        .Hard {
+            color: rgb(239,71,67);
+        }
+    </style>
     <link rel="preload" href="{{resPath}}font/tttgbnumber.ttf" as="font">
     </head>
     <body>
     <div style="font-size:2em;padding:2em;width:800px" class="container" id="container">
         <div class="title"></div>
         <h3>Leetcode-每日一题</h3>
-        <h4>{{no}} {{titleCn}} {{level}}</h4>
+        <div style="display: flex; justify-content: space-between;">
+            <span>{{no}}. {{titleCn}} </span>
+            <span class="{{level}}">{{level}}</span>
+        </div>
+        <hr>
         {{@context}}
     </div>
     </body>
