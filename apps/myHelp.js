@@ -22,7 +22,7 @@ export class myHelp extends plugin {
       name: '我的帮助',
       dsc: '发送帮助信息',
       event: 'message',
-      priority: 100,
+      priority: 10,
       rule: [
         {
           reg: '^#?help$',
