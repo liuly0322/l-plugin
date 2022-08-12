@@ -9,13 +9,11 @@ L-Plugin 是一个 Yunzai-Bot 的偏向正常 QQ 机器人的功能插件
 具体功能（发送 help 查看）：
 
 - 「塔罗牌」占卜
-  - 发送图片示例，通过 github 的 cdn 加速图片
 - 「每日一题」LeetCode 每日一题
-  - axios 示例
+- 「随机一题」LeetCode 随机一题
 - 「r/roll」骰子
 - 「(咱)今天吃什么」美食推荐
 - 「添加/删除食物」更改群菜单
-  - 通过使用 Redis 数据库实现
 - 「tex」生成公式对应图片
 - 「markdown」同上
 - 「python」隔离运行代码
