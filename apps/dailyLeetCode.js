@@ -8,7 +8,7 @@ import { dirname } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const BASE_URL = 'https://leetcode-cn.com'
+const BASE_URL = 'https://leetcode.cn'
 
 export class dailyLeetCode extends plugin {
   constructor () {
@@ -21,21 +21,17 @@ export class dailyLeetCode extends plugin {
         {
           reg: '^#?每日一题$',
           fnc: 'dailyLeetCode'
+        },
+        {
+          reg: '^#?随机一题$',
+          fnc: 'randomLeetCode'
         }
       ]
     })
+    this.prefix = 'L:other:dailyLeetCode'
   }
-
-  async dailyLeetCode () {
-    const questionEn = await axios.post(BASE_URL + '/graphql', {
-      operationName: 'questionOfToday',
-      variables: {},
-      query:
-        'query questionOfToday { todayRecord {   question {     questionFrontendId     questionTitleSlug     __typename   }   lastSubmission {     id     __typename   }   date   userStatus   __typename }}'
-    })
-    const title =
-      questionEn.data.data.todayRecord[0].question.questionTitleSlug
-
+  
+  async renderData (title) {
     const question = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionData',
       variables: { titleSlug: title },
@@ -62,5 +58,26 @@ export class dailyLeetCode extends plugin {
     await this.reply(img)
 
     await this.reply(problemUrl)
+  }
+  
+  async dailyLeetCode () {
+    const questionEn = await axios.post(BASE_URL + '/graphql', {
+      operationName: 'questionOfToday',
+      variables: {},
+      query:
+        'query questionOfToday { todayRecord {   question {     questionFrontendId     questionTitleSlug     __typename   }   lastSubmission {     id     __typename   }   date   userStatus   __typename }}'
+    })
+    const title =
+      questionEn.data.data.todayRecord[0].question.questionTitleSlug
+    await this.renderData(title)
+  }
+  
+  async randomLeetCode () {
+    const questionsAll = await axios.get(BASE_URL + '/api/problems/all/')
+    const titles = questionsAll.data.stat_status_pairs
+      .filter((q) => q.paid_only === false)
+      .map((q) => q.stat.question__title_slug);
+    const title = lodash.sample(titles)
+    await this.renderData(title)
   }
 }
