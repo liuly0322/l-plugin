@@ -10,6 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const BASE_URL = 'https://leetcode.cn'
+let All_QUESTIONS = null
 
 export class dailyLeetCode extends plugin {
   constructor () {
@@ -29,9 +30,8 @@ export class dailyLeetCode extends plugin {
         }
       ]
     })
-    this.prefix = 'L:other:dailyLeetCode'
   }
-  
+
   async renderData (title) {
     const question = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionData',
@@ -74,7 +74,8 @@ export class dailyLeetCode extends plugin {
   }
   
   async randomLeetCode () {
-    const questionsAll = await axios.get(BASE_URL + '/api/problems/all/')
+    const questionsAll = All_QUESTIONS ?? await axios.get(BASE_URL + '/api/problems/all/')
+    All_QUESTIONS = questionsAll
     const titles = questionsAll.data.stat_status_pairs
       .filter((q) => q.paid_only === false)
       .map((q) => q.stat.question__title_slug);
