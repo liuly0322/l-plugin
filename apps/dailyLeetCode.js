@@ -1,6 +1,7 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import puppeteer from '../../../lib/puppeteer/puppeteer.js'
 import axios from 'axios'
+import lodash from 'lodash'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
