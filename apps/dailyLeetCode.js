@@ -25,7 +25,7 @@ export class dailyLeetCode extends plugin {
           fnc: 'dailyLeetCode'
         },
         {
-          reg: '^#?随机一题$',
+          reg: '^#?随机一题.*\\w$',
           fnc: 'randomLeetCode'
         }
       ]
@@ -75,10 +75,28 @@ export class dailyLeetCode extends plugin {
   
   async randomLeetCode () {
     const questionsAll = All_QUESTIONS ?? await axios.get(BASE_URL + '/api/problems/all/')
+    if (!questionsAll) {
+      return await this.reply('Leetcode API网络错误...')
+    }
     All_QUESTIONS = questionsAll
-    const titles = questionsAll.data.stat_status_pairs
+    
+    const msg = this.e.msg.toLowerCase()
+    let questions = questionsAll.data.stat_status_pairs
       .filter((q) => q.paid_only === false)
-      .map((q) => q.stat.question__title_slug);
+    if (msg.includes('easy')) {
+      questions = questions.filter((q) => q.difficulty.level == 1)
+    }
+    if (msg.includes('medium')) {
+      questions = questions.filter((q) => q.difficulty.level == 2)
+    }
+    if (msg.includes('hard')) {
+      questions = questions.filter((q) => q.difficulty.level == 3)
+    }
+    if (!questions) {
+      return await this.reply('Leetcode API格式错误...')
+    }
+    
+    const titles = questions.map((q) => q.stat.question__title_slug);
     const title = lodash.sample(titles)
     await this.renderData(title)
   }
