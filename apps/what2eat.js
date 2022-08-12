@@ -35,11 +35,11 @@ export class what2eat extends plugin {
       return await this.reply('请群聊发送')
     }
     const key = this.getKey()
-    const foods = this.e.msg.split(' ').slice(1)
+    const foods = this.e.msg.split(' ').filter(Boolean).slice(1)
     foods.forEach(async (food) => {
       await redis.sAdd(key, food)
     })
-    await this.reply('添加成功！')
+    await this.reply(`添加了${foods.length}个群特色食物...`)
   }
 
   async deleteFood () {
@@ -47,11 +47,11 @@ export class what2eat extends plugin {
       return await this.reply('请群聊发送')
     }
     const key = this.getKey()
-    const foods = this.e.msg.split(' ').slice(1)
+    const foods = this.e.msg.split(' ').filter(Boolean).slice(1)
     foods.forEach(async (food) => {
       await redis.sRem(key, food)
     })
-    await this.reply('删除成功！')
+    await this.reply(`已经尝试删除${foods.length}个群特色食物...`)
   }
 
   async what2eat () {
