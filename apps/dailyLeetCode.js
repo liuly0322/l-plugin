@@ -1,6 +1,7 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import puppeteer from '../../../lib/puppeteer/puppeteer.js'
 import axios from 'axios'
+import lodash from 'lodash'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -8,7 +9,8 @@ import { dirname } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const BASE_URL = 'https://leetcode-cn.com'
+const BASE_URL = 'https://leetcode.cn'
+let All_QUESTIONS = null
 
 export class dailyLeetCode extends plugin {
   constructor () {
@@ -21,21 +23,16 @@ export class dailyLeetCode extends plugin {
         {
           reg: '^#?每日一题$',
           fnc: 'dailyLeetCode'
+        },
+        {
+          reg: '^#?随机一题$',
+          fnc: 'randomLeetCode'
         }
       ]
     })
   }
 
-  async dailyLeetCode () {
-    const questionEn = await axios.post(BASE_URL + '/graphql', {
-      operationName: 'questionOfToday',
-      variables: {},
-      query:
-        'query questionOfToday { todayRecord {   question {     questionFrontendId     questionTitleSlug     __typename   }   lastSubmission {     id     __typename   }   date   userStatus   __typename }}'
-    })
-    const title =
-      questionEn.data.data.todayRecord[0].question.questionTitleSlug
-
+  async renderData (title) {
     const question = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionData',
       variables: { titleSlug: title },
@@ -62,5 +59,27 @@ export class dailyLeetCode extends plugin {
     await this.reply(img)
 
     await this.reply(problemUrl)
+  }
+  
+  async dailyLeetCode () {
+    const questionEn = await axios.post(BASE_URL + '/graphql', {
+      operationName: 'questionOfToday',
+      variables: {},
+      query:
+        'query questionOfToday { todayRecord {   question {     questionFrontendId     questionTitleSlug     __typename   }   lastSubmission {     id     __typename   }   date   userStatus   __typename }}'
+    })
+    const title =
+      questionEn.data.data.todayRecord[0].question.questionTitleSlug
+    await this.renderData(title)
+  }
+  
+  async randomLeetCode () {
+    const questionsAll = All_QUESTIONS ?? await axios.get(BASE_URL + '/api/problems/all/')
+    All_QUESTIONS = questionsAll
+    const titles = questionsAll.data.stat_status_pairs
+      .filter((q) => q.paid_only === false)
+      .map((q) => q.stat.question__title_slug);
+    const title = lodash.sample(titles)
+    await this.renderData(title)
   }
 }
