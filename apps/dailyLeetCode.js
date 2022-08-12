@@ -25,7 +25,7 @@ export class dailyLeetCode extends plugin {
           fnc: 'dailyLeetCode'
         },
         {
-          reg: '^#?随机一题.*\\w$',
+          reg: '^#?随机一题(.*\\w)?$',
           fnc: 'randomLeetCode'
         }
       ]
