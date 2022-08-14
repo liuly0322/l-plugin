@@ -3,9 +3,14 @@ import puppeteer from '../../../lib/puppeteer/puppeteer.js'
 import axios from 'axios'
 import lodash from 'lodash'
 import moment from 'moment'
+import MarkdownIt from 'markdown-it'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
+
+const md = new MarkdownIt({
+  html: true
+})
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -94,7 +99,7 @@ export class dailyLeetCode extends plugin {
   async dailyLeetCode () {
     const history = await this.updateHistory()
     if (!history.today) {
-      return await this.e.reply('获取今日题目失败...')
+      return await this.reply('获取今日题目失败...')
     }
     await this.renderQuestion(history.today)
   }
@@ -177,7 +182,7 @@ export class dailyLeetCode extends plugin {
       slug = history.last
     }
     if (!slug) {
-      return await this.e.reply('暂时没有获取到题目信息...')
+      return await this.reply('暂时没有获取到题目信息...')
     }
     const comments = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionSolutionArticles',
@@ -199,6 +204,13 @@ export class dailyLeetCode extends plugin {
       query: 'query solutionDetailArticle($slug: String!, $orderBy: SolutionArticleOrderBy!) {\n  solutionArticle(slug: $slug, orderBy: $orderBy) {\n    ...solutionArticle\n    content\n    question {\n      questionTitleSlug\n      __typename\n    }\n    position\n    next {\n      slug\n      title\n      __typename\n    }\n    prev {\n      slug\n      title\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment solutionArticle on SolutionArticleNode {\n  ipRegion\n  rewardEnabled\n  canEditReward\n  uuid\n  title\n  slug\n  sunk\n  chargeType\n  status\n  identifier\n  canEdit\n  canSee\n  reactionType\n  reactionsV2 {\n    count\n    reactionType\n    __typename\n  }\n  tags {\n    name\n    nameTranslated\n    slug\n    tagType\n    __typename\n  }\n  createdAt\n  thumbnail\n  author {\n    username\n    profile {\n      userAvatar\n      userSlug\n      realName\n      __typename\n    }\n    __typename\n  }\n  summary\n  topic {\n    id\n    commentCount\n    viewCount\n    __typename\n  }\n  byLeetcode\n  isMyFavorite\n  isMostPopular\n  isEditorsPick\n  hitCount\n  videosInfo {\n    videoId\n    coverUrl\n    duration\n    __typename\n  }\n  __typename\n}\n'
     })
     const markdown = commentData.data.data.solutionArticle.content
-    return await this.e.reply(markdown)
+    await this.reply(markdown)
+    const markdownHtml = md.render(markdown)
+    let data = {
+      markdownHtml,
+      tplFile: `${__dirname}/markdown.html`
+    }
+    let img = await puppeteer.screenshot('markdown', data)
+    await this.reply(img)
   }
 }
