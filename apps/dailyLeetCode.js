@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const BASE_URL = 'https://leetcode.cn'
-let All_QUESTIONS = null
+let cachedQuestionsAll = null
 
 export class dailyLeetCode extends plugin {
   constructor () {
@@ -60,7 +60,7 @@ export class dailyLeetCode extends plugin {
 
     await this.reply(problemUrl)
   }
-  
+
   async dailyLeetCode () {
     const questionEn = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionOfToday',
@@ -72,14 +72,14 @@ export class dailyLeetCode extends plugin {
       questionEn.data.data.todayRecord[0].question.questionTitleSlug
     await this.renderData(title)
   }
-  
+
   async randomLeetCode () {
-    const questionsAll = All_QUESTIONS ?? await axios.get(BASE_URL + '/api/problems/all/')
+    const questionsAll = cachedQuestionsAll ?? await axios.get(BASE_URL + '/api/problems/all/')
     if (!questionsAll) {
       return await this.reply('Leetcode API网络错误...')
     }
-    All_QUESTIONS = questionsAll
-    
+    cachedQuestionsAll = questionsAll
+
     const msg = this.e.msg.toLowerCase()
     let questions = questionsAll.data.stat_status_pairs
       .filter((q) => q.paid_only === false)
@@ -95,8 +95,8 @@ export class dailyLeetCode extends plugin {
     if (!questions) {
       return await this.reply('Leetcode API格式错误...')
     }
-    
-    const titles = questions.map((q) => q.stat.question__title_slug);
+
+    const titles = questions.map((q) => q.stat.question__title_slug)
     const title = lodash.sample(titles)
     await this.renderData(title)
   }
