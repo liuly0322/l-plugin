@@ -2,6 +2,7 @@ import plugin from '../../../lib/plugins/plugin.js'
 import puppeteer from '../../../lib/puppeteer/puppeteer.js'
 import axios from 'axios'
 import lodash from 'lodash'
+import katex from 'katex'
 import moment from 'moment'
 import MarkdownIt from 'markdown-it'
 import TexMath from 'markdown-it-texmath'
@@ -12,7 +13,7 @@ import { dirname } from 'path'
 const md = new MarkdownIt({
   html: true
 }).use(TexMath, {
-  engine: require('katex'),
+  engine: katex,
   delimiters: 'dollars',
   katexOptions: { macros: { '\\RR': '\\mathbb{R}' } }
 })
