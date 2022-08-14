@@ -4,12 +4,17 @@ import axios from 'axios'
 import lodash from 'lodash'
 import moment from 'moment'
 import MarkdownIt from 'markdown-it'
+import TexMath from 'markdown-it-texmath'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 
 const md = new MarkdownIt({
   html: true
+}).use(TexMath, {
+  engine: require('katex'),
+  delimiters: 'dollars',
+  katexOptions: { macros: { '\\RR': '\\mathbb{R}' } }
 })
 
 const __filename = fileURLToPath(import.meta.url)
