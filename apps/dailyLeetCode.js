@@ -55,7 +55,7 @@ export class dailyLeetCode extends plugin {
     return this.prefix + 'history'
   }
 
-  async renderQuestion (title) {
+  async renderQuestion (title, type = '每日一题') {
     const question = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionData',
       variables: { titleSlug: title },
@@ -71,8 +71,8 @@ export class dailyLeetCode extends plugin {
     const problemUrl = BASE_URL + '/problems/' + title
 
     let data = {
-      no,
-      titleCn,
+      type,
+      title: `${no}. ${titleCn}`,
       level,
       context,
       tplFile: `${__dirname}/dailyLeetCode.html`
@@ -129,7 +129,7 @@ export class dailyLeetCode extends plugin {
 
     const titles = questions.map((q) => q.stat.question__title_slug)
     const title = lodash.sample(titles)
-    await this.renderQuestion(title)
+    await this.renderQuestion(title, '随机一题')
   }
 
   /**
@@ -203,14 +203,17 @@ export class dailyLeetCode extends plugin {
       },
       query: 'query solutionDetailArticle($slug: String!, $orderBy: SolutionArticleOrderBy!) {\n  solutionArticle(slug: $slug, orderBy: $orderBy) {\n    ...solutionArticle\n    content\n    question {\n      questionTitleSlug\n      __typename\n    }\n    position\n    next {\n      slug\n      title\n      __typename\n    }\n    prev {\n      slug\n      title\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment solutionArticle on SolutionArticleNode {\n  ipRegion\n  rewardEnabled\n  canEditReward\n  uuid\n  title\n  slug\n  sunk\n  chargeType\n  status\n  identifier\n  canEdit\n  canSee\n  reactionType\n  reactionsV2 {\n    count\n    reactionType\n    __typename\n  }\n  tags {\n    name\n    nameTranslated\n    slug\n    tagType\n    __typename\n  }\n  createdAt\n  thumbnail\n  author {\n    username\n    profile {\n      userAvatar\n      userSlug\n      realName\n      __typename\n    }\n    __typename\n  }\n  summary\n  topic {\n    id\n    commentCount\n    viewCount\n    __typename\n  }\n  byLeetcode\n  isMyFavorite\n  isMostPopular\n  isEditorsPick\n  hitCount\n  videosInfo {\n    videoId\n    coverUrl\n    duration\n    __typename\n  }\n  __typename\n}\n'
     })
-    const markdown = commentData.data.data.solutionArticle.content
-    await this.reply(markdown)
-    const markdownHtml = md.render(markdown)
+    const title = commentData.data.data.solutionArticle.title
+    const markdownText = commentData.data.data.solutionArticle.content
+    const markdownHtml = md.render(markdownText)
     let data = {
-      markdownHtml,
-      tplFile: `${__dirname}/markdown.html`
+      type: '题解',
+      title,
+      level: '',
+      context: markdownHtml,
+      tplFile: `${__dirname}/dailyLeetCode.html`
     }
-    let img = await puppeteer.screenshot('markdown', data)
+    let img = await puppeteer.screenshot('dailyLeetCode', data)
     await this.reply(img)
   }
 }
