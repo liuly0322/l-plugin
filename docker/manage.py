@@ -9,8 +9,8 @@ f.close()
 
 try:
     from subprocess import run
-    result = run(['python', 'main.py'], capture_output=True, timeout=1)
+    result = run(['/usr/local/bin/python', 'main.py'], capture_output=True, timeout=1)
     print(result.stdout.decode('utf-8')[:-1])
-except:
+except Exception:
     print('运行超时！')
 
