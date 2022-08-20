@@ -20,9 +20,7 @@
 
 L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能插件
 
-目前因为是自用的，所以安装完后会替换默认帮助信息，通过 `#云崽帮助` 查看原有帮助信息
-
-具体功能（发送 help 查看）：
+安装后发送 help 查看具体功能
 
 - 「塔罗牌」占卜
 - 「每日一题」LeetCode 每日一题
@@ -36,16 +34,15 @@ L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能
 - 「python」隔离运行代码
 - 「求签」来鸣神大社抽签
 
-## 使用说明
-
-L-Plugin 需要最新版本（V3）的 Yunzai-Bot，请确认 Yunzai-Bot 已升级至最新版
+help 指令默认覆盖了 Yunzai 的帮助，如需查看原有帮助可发送 `帮助`
 
 ## 安装
 
-推荐使用 git 进行安装。在 BOT 根目录文件夹打开终端，运行
+L-Plugin 需要最新版本（V3）的 Yunzai-Bot，请确认 Yunzai-Bot 已升级至最新版
+
+在 BOT 根目录文件夹打开终端，运行
 
 ```
-// 使用github
 git clone https://github.com/liuly0322/l-plugin.git ./plugins/l-plugin/
 ```
 
@@ -63,7 +60,7 @@ cd docker
 sudo docker build -t ubuntu-python-playground-img .
 ```
 
-## 免责声明
+## 声明
 
 图片与其他素材均来自于网络，仅供交流学习使用，如有侵权请联系，会立即删除
 
