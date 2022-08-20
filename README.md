@@ -1,16 +1,32 @@
-# L-Plugin 说明
+<div align="center">
+  
+# L-Plugin
 
-L-Plugin 是一个 Yunzai-Bot 的偏向正常 QQ 机器人的功能插件
+</div>
 
-目前因为是写着玩的，所以安装完后会替换默认帮助信息，通过 `#云崽帮助` 查看原有帮助信息
+<p align="center">
 
-本仓库依赖 (axios) 也使用 pnpm 管理，与 Yunzai-Bot 依赖独立
+  <a href="https://github.com/liuly0322/l-plugin/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/liuly0322/l-plugin?color=blue">
+  </a>
+  
+  <a href="https://www.codefactor.io/repository/github/liuly0322/l-plugin">
+    <img src="https://img.shields.io/codefactor/grade/github/liuly0322/l-plugin/main">
+  </a>
+  
+</p>
+
+## 简介
+
+L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能插件
+
+目前因为是自用的，所以安装完后会替换默认帮助信息，通过 `#云崽帮助` 查看原有帮助信息
 
 具体功能（发送 help 查看）：
 
 - 「塔罗牌」占卜
 - 「每日一题」LeetCode 每日一题
-- 「随机一题」LeetCode 随机一题
+- 「随机一题(easy/medium/hard)」LeetCode 随机一题
 - 「今日/昨日题解」查看答案
 - 「r/roll」骰子
 - 「(咱)今天吃什么」美食推荐
@@ -22,11 +38,11 @@ L-Plugin 是一个 Yunzai-Bot 的偏向正常 QQ 机器人的功能插件
 
 ## 使用说明
 
-L-Plugin 需要最新版本的 Yunzai-Bot，请确认 Yunzai-Bot 已升级至最新版
+L-Plugin 需要最新版本（V3）的 Yunzai-Bot，请确认 Yunzai-Bot 已升级至最新版
 
-## 安装与更新
+## 安装
 
-推荐使用 git 进行安装。在 BOT 根目录夹打开终端，运行
+推荐使用 git 进行安装。在 BOT 根目录文件夹打开终端，运行
 
 ```
 // 使用github
@@ -40,7 +56,7 @@ cd plugins/l-plugin
 pnpm install
 ```
 
-如果需要支持运行 python，继续执行:
+如果需要启用运行 python 代码的功能，继续执行:
 
 ```
 cd docker
@@ -49,10 +65,9 @@ sudo docker build -t ubuntu-python-playground-img .
 
 # 免责声明
 
-1. 功能仅限内部交流与小范围使用，请勿将 Yunzai-Bot 及 L-Plugin 用于任何以盈利为目的的场景
-2. 图片与其他素材均来自于网络，仅供交流学习使用，如有侵权请联系，会立即删除
+图片与其他素材均来自于网络，仅供交流学习使用，如有侵权请联系，会立即删除
 
-# 其他
+# 参考项目
 
 - [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot)
 - [Miao-Plugin](https://github.com/yoimiya-kokomi/Miao-plugin)
