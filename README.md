@@ -63,11 +63,11 @@ cd docker
 sudo docker build -t ubuntu-python-playground-img .
 ```
 
-# 免责声明
+## 免责声明
 
 图片与其他素材均来自于网络，仅供交流学习使用，如有侵权请联系，会立即删除
 
-# 参考项目
+## 参考项目
 
 - [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot)
 - [Miao-Plugin](https://github.com/yoimiya-kokomi/Miao-plugin)
