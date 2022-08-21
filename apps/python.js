@@ -43,7 +43,7 @@ export class python extends plugin {
         stdout = lodash.truncate(stdout, { length: 100 })
         await this.reply(stdout)
       } else {
-        await this.reply('docker出现错误...')
+        await this.reply('输出只包含空白字符...')
       }
     } catch (error) {
       await this.reply('docker出现错误...')
