@@ -9,11 +9,15 @@
   <a href="https://github.com/liuly0322/l-plugin/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/liuly0322/l-plugin?color=blue">
   </a>
-  
+
+  <a href="https://github.com/liuly0322/l-plugin/actions/workflows/test.yml">
+    <img src="https://github.com/liuly0322/l-plugin/actions/workflows/test.yml/badge.svg?branch=main">
+  </a>
+
   <a href="https://www.codefactor.io/repository/github/liuly0322/l-plugin">
     <img src="https://img.shields.io/codefactor/grade/github/liuly0322/l-plugin/main">
   </a>
-  
+
 </p>
 
 ## 简介
