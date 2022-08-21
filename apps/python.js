@@ -36,16 +36,17 @@ export class python extends plugin {
     const fileName = this.path + '/' + crypto.randomUUID()
     await fsPromises.writeFile(fileName, code)
     try {
+      // 这里的 stdout 是管理程序的输出，已经兼顾考虑了 stderr 和没有输出的情况
       let { stdout } = await execPromise(`sudo docker run -i --rm ubuntu-python-playground-img < ${fileName}`)
       stdout = lodash.trim(stdout)
       if (stdout) {
         stdout = lodash.truncate(stdout, { length: 100 })
         await this.reply(stdout)
       } else {
-        await this.reply('无标准输出内容！')
+        await this.reply('docker出现错误...')
       }
     } catch (error) {
-      await this.reply('执行失败...')
+      await this.reply('docker出现错误...')
     }
   }
 }
