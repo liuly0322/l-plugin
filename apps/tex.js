@@ -27,7 +27,10 @@ export class tex extends plugin {
 
   async render () {
     const formula = this.e.msg.split(/(?<=^\S+)\s/).pop()
-    const texHtml = katex.renderToString(formula, { throwOnError: false })
+    const texHtml = katex.renderToString(formula, {
+      throwOnError: false,
+      strict: false
+    })
     let data = {
       texHtml,
       tplFile: `${__dirname}/tex.html`
