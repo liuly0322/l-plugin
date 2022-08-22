@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Plugin for Yunzai-bot",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit"
   },
   "type": "module",
   "module": "index.js",
@@ -14,5 +14,8 @@
     "katex": "^0.16.0",
     "markdown-it": "^13.0.1",
     "markdown-it-texmath": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0"
   }
 }

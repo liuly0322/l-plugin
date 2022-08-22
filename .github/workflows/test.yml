@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,11 +25,5 @@ jobs:
       - name: install plugin dependencies
         run: docker exec yunzai-bot sh -c "cd plugins/l-plugin/ && pnpm install"
 
-      - name: copy test script
-        run: docker cp test/test.sh yunzai-bot:/app/Yunzai-Bot
-
       - name: run test script
-        run: docker exec yunzai-bot sh test.sh
-
-      - name: check log
-        run: sudo chown -R $(whoami) ./test/yunzai/logs && sudo chmod -R 777 ./test/yunzai/logs && sh -c "! grep -rq 'ERRO' ./test/yunzai/logs"
+        run: docker exec yunzai-bot sh -c "cd plugins/l-plugin/ && pnpm run test"
