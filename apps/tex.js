@@ -1,5 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import puppeteer from '../../../lib/puppeteer/puppeteer.js'
+import screenshot from '../utils/tex/screenshot.js'
 import katex from 'katex'
 
 import { fileURLToPath } from 'url'
@@ -31,7 +32,7 @@ export class tex extends plugin {
       texHtml,
       tplFile: `${__dirname}/tex.html`
     }
-    let img = await puppeteer.screenshot('tex', data)
+    let img = await screenshot(puppeteer, 'tex', data)
     await this.reply(img)
   }
 }
