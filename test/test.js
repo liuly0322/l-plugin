@@ -102,7 +102,7 @@ describe('塔罗牌', function () {
 describe('每日一题', function () {
   // 超时设置为 60 秒
   this.timeout(60 * 1000)
-  
+
   it('应该返回一张图片和对应 url', async function () {
     const res = await command.run('每日一题')
     assert.equal(res.length, 2)

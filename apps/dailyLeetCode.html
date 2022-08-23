@@ -42,6 +42,18 @@
         <hr>
         {{@context}}
     </div>
+    <script>
+        const container = document.querySelector('#container')
+        let last = container.children[0]
+        Array.from(container.children).slice(1).forEach((cur) => {
+            if (last.tagName == 'PRE' && last.children[0]?.tagName == 'CODE' &&
+            cur.tagName == 'PRE' && cur.children[0]?.tagName == 'CODE') {
+                cur.remove()
+                return
+            }
+            last = cur
+        })
+    </script>
     </body>
     <script type="text/javascript"></script>
 </html>

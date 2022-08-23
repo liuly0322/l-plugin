@@ -6,6 +6,7 @@ import katex from 'katex'
 import moment from 'moment'
 import MarkdownIt from 'markdown-it'
 import TexMath from 'markdown-it-texmath'
+import screenshot from '../utils/common/screenshot.js'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -84,7 +85,7 @@ export class dailyLeetCode extends plugin {
       tplFile: `${__dirname}/dailyLeetCode.html`
     }
 
-    let img = await puppeteer.screenshot('dailyLeetCode', data)
+    let img = await screenshot(puppeteer, 'dailyLeetCode', data)
     await this.reply(img)
 
     await this.reply(problemUrl)
