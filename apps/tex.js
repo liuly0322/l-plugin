@@ -1,6 +1,6 @@
 import plugin from '../../../lib/plugins/plugin.js'
 import puppeteer from '../../../lib/puppeteer/puppeteer.js'
-import screenshot from '../utils/tex/screenshot.js'
+import screenshot from '../utils/common/screenshot.js'
 import katex from 'katex'
 
 import { fileURLToPath } from 'url'
