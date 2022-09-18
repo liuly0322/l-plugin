@@ -29,14 +29,22 @@ L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能
 - 「塔罗牌」占卜
 - 「每日一题」LeetCode 每日一题
 - 「随机一题(easy/medium/hard)」LeetCode 随机一题
+  - 如：随机一题hard
 - 「今日/昨日题解」查看答案
 - 「r/roll」骰子
+  - r (随便什么文本，可以为空) a b 即在 a 和 b 之间 roll 一个数字
+  - roll a b c 即随机选出 a, b, c 中的一个
 - 「(咱)今天吃什么」美食推荐
+  - 今天吃什么会考虑基本菜单和群菜单
+  - 咱今天吃什么只考虑群菜单
 - 「添加/删除食物」更改群菜单
+  - 如：添加食物 kfc
 - 「tex」生成公式对应图片
+  - 如：tex 1+1=2
 - 「markdown」同上
 - 「python」隔离运行代码
-- 「求签」来鸣神大社抽签
+  - 需要额外配置 docker
+- 「求签」鸣神大社抽签
 
 help 指令默认覆盖了 Yunzai 的帮助，如需查看原有帮助可发送 `帮助`
 
@@ -64,9 +72,15 @@ cd docker
 sudo docker build -t ubuntu-python-playground-img .
 ```
 
+## to be done
+
+- 每日一题推送
+- 塔罗牌图片缓存本地
+- 支持修改基础菜单
+
 ## 声明
 
-图片与其他素材均来自于网络，仅供交流学习使用，如有侵权请联系，会立即删除
+部分素材来自于网络，尽量遵循原协议，如有侵权请联系
 
 ## 参考项目
 
