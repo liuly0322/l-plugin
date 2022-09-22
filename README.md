@@ -10,6 +10,10 @@
     <img src="https://img.shields.io/github/license/liuly0322/l-plugin?color=blue">
   </a>
 
+  <a href="https://github.com/Le-niao/Yunzai-Bot">
+    <img src="https://img.shields.io/badge/Yunzai-3.0.0+-orange">
+  </a>
+
   <a href="https://github.com/liuly0322/l-plugin/actions/workflows/test.yml">
     <img src="https://github.com/liuly0322/l-plugin/actions/workflows/test.yml/badge.svg?branch=main">
   </a>
@@ -22,13 +26,13 @@
 
 ## 简介
 
-L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能插件
+L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) V3 的功能插件
 
 安装后发送 help 查看具体功能
 
 - 「塔罗牌」占卜
   - 安装时不自带图片资源，每次下载完后会缓存图片在本地 `./data/tarots` 下
-  - 图片使用 `fastgit` 加速，如果总是失败可以考虑参考该功能 [原项目](https://github.com/MinatoAquaCrews/nonebot_plugin_tarot) 的 README 下载资源文件，保存在 `./data/tarots` （相对本项目安装路径）下
+  - 图片使用 jsdelivr 加速，如果总是失败可以参考该功能 [原项目](https://github.com/MinatoAquaCrews/nonebot_plugin_tarot) 的 README 下载资源文件，保存在 `./data/tarots` （相对本项目安装路径）下
   - 如果有图片资源损坏也可以通过本方法手动替换文件修复
 - 「每日一题」LeetCode 每日一题
 - 「随机一题(easy/medium/hard)」LeetCode 随机一题
