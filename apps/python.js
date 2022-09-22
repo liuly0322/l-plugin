@@ -37,7 +37,7 @@ export class python extends plugin {
     await fsPromises.writeFile(fileName, code)
     try {
       // 这里的 stdout 是管理程序的输出，已经兼顾考虑了 stderr 和没有输出的情况
-      let { stdout } = await execPromise(`sudo docker run -i --rm ubuntu-python-playground-img < ${fileName}`)
+      let { stdout } = await execPromise(`sudo docker run -i --pids-limit 256 --rm ubuntu-python-playground-img < ${fileName}`)
       stdout = lodash.trim(stdout)
       if (stdout) {
         stdout = lodash.truncate(stdout, { length: 100 })
