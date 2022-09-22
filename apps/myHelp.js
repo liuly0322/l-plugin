@@ -6,7 +6,7 @@ const masterQQ = cfg.masterQQ[0]
 loader.checkStr = (msg) => msg
 
 const content =
-  '原神Yunzai-bot plus\n' +
+  'Yunzai-bot L插件\n' +
   '「塔罗牌」占卜\n' +
   '「每日/随机一题」LeetCode\n' +
   '「今日/昨日题解」查看答案\n' +
@@ -17,7 +17,7 @@ const content =
   '「markdown」同上\n' +
   '「python」执行 python 代码\n' +
   '「求签」来鸣神大社抽签\n' +
-  '「云崽/喵喵帮助」原神bot功能\n' + (masterQQ ? `联系：${masterQQ}` : '')
+  '「云崽帮助」原神bot功能\n'
 
 export class myHelp extends plugin {
   constructor () {
@@ -29,6 +29,10 @@ export class myHelp extends plugin {
       rule: [
         {
           reg: '^#?help$',
+          fnc: 'help'
+        },
+        {
+          reg: '^#?[lL]\\s?(插件)?[\\s_]?(help|帮助)$',
           fnc: 'help'
         }
       ]
