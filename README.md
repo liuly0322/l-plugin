@@ -24,7 +24,7 @@
 
 L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能插件
 
-安装后发送 help 查看具体功能
+安装后发送 `help` 或 `L插件帮助` 查看具体功能
 
 - 「塔罗牌」占卜
   - 安装时不自带图片资源，每次下载完后会缓存图片在本地 `./data/tarots` 下
@@ -49,7 +49,7 @@ L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) 的功能
   - 需要额外配置 docker
 - 「求签」鸣神大社抽签
 
-help 指令默认覆盖了 Yunzai 的帮助，如需查看原有帮助可发送 `帮助`
+`help` 指令覆盖了 Yunzai 的帮助，如需查看原有帮助可发送 `帮助`
 
 ## 安装
 
