@@ -78,8 +78,6 @@ sudo docker build -t ubuntu-python-playground-img .
 ## to be done
 
 - 每日一题推送
-- 塔罗牌图片缓存本地
-- 支持修改基础菜单
 
 ## 声明
 

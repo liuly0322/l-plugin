@@ -1,5 +1,5 @@
 import fs from 'fs'
-import fetch from 'node-fetch'
+import downloadFile from '../utils/common/download.js'
 import { segment } from 'oicq'
 import lodash from 'lodash'
 import plugin from '../../../lib/plugins/plugin.js'
@@ -45,17 +45,11 @@ export class tarot extends plugin {
     } catch (e) {}
 
     // 尝试下载到本地
-    const url = 'https://raw.fastgit.org/MinatoAquaCrews/nonebot_plugin_tarot/beta/nonebot_plugin_tarot/resource/' + card.type + '/' + card.pic
-    const res = await fetch(url)
-    if (res.status !== 200) {
-      return await this.reply('下载图片失败，如果出现多次本提示可以考虑手动下载...')
+    const url = 'https://fastly.jsdelivr.net/gh/MinatoAquaCrews/nonebot_plugin_tarot@beta/nonebot_plugin_tarot/resource/' + card.type + '/' + card.pic
+    const ret = await downloadFile(url, localPath)
+    if (ret === 'error') {
+      return await this.reply('下载图片失败，如果多次出现本提示可以考虑手动下载...')
     }
-    const fileStream = fs.createWriteStream(localPath)
-    await new Promise((resolve, reject) => {
-      res.body.pipe(fileStream)
-      res.body.on('error', reject)
-      fileStream.on('finish', resolve)
-    })
     const pic = segment.image(localPath)
     await this.reply(pic)
   }
