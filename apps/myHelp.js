@@ -1,7 +1,9 @@
 import plugin from '../../../lib/plugins/plugin.js'
+import loader from '../../../lib/plugins/loader.js'
 import cfg from '../../../lib/config/config.js'
 
 const masterQQ = cfg.masterQQ[0]
+loader.checkStr = (msg) => msg
 
 const content =
   '原神Yunzai-bot plus\n' +

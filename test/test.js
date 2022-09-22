@@ -92,6 +92,9 @@ await command.init()
 log4js.shutdown()
 
 describe('塔罗牌', function () {
+  // 超时设置为 60 秒
+  this.timeout(60 * 1000)
+
   it('应该返回一条牌面信息和对应图片', async function () {
     const res = await command.run('塔罗牌')
     assert.equal(res.length, 2)

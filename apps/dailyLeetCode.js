@@ -44,6 +44,10 @@ export class dailyLeetCode extends plugin {
         {
           reg: '^#?(昨日|今日)?题解$',
           fnc: 'solve'
+        },
+        {
+          reg: '^#?题解\\s',
+          fnc: 'solve'
         }
       ]
     })
@@ -87,8 +91,7 @@ export class dailyLeetCode extends plugin {
 
     let img = await screenshot(puppeteer, 'dailyLeetCode', data)
     await this.reply(img)
-
-    await this.reply(problemUrl)
+    await this.reply(`${problemUrl}\n查看答案发送：#题解 ${title}`)
   }
 
   async todayTitle () {
@@ -183,13 +186,20 @@ export class dailyLeetCode extends plugin {
   }
 
   async solve () {
-    const history = await this.updateHistory()
-    let slug = history.today
-    if (this.e.msg.includes('昨日')) {
-      slug = history.last
+    let slug
+    const commandTokens = this.e.msg.split(' ')
+    if (commandTokens.length > 1) {
+      slug = commandTokens.pop()
+    } else {
+      const history = await this.updateHistory()
+      slug = history.today
+      if (this.e.msg.includes('昨日')) {
+        slug = history.last
+      }
     }
+
     if (!slug) {
-      return await this.reply('暂时没有获取到题目信息...')
+      return await this.reply('没有获取到题目信息...')
     }
     const comments = await axios.post(BASE_URL + '/graphql', {
       operationName: 'questionSolutionArticles',
