@@ -4,7 +4,6 @@
  */
 
 import lodash from 'lodash'
-import { segment } from 'oicq'
 
 export default async function (puppeteer, name, data) {
   if (!await puppeteer.browserInit()) {
