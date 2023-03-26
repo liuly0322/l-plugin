@@ -1,6 +1,5 @@
 import fs from 'fs'
 import downloadFile from '../utils/common/download.js'
-import { segment } from 'oicq'
 import lodash from 'lodash'
 import plugin from '../../../lib/plugins/plugin.js'
 import cards from '../data/tarot.js'
