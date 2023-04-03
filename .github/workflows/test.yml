@@ -23,7 +23,7 @@ jobs:
         run: docker cp test/qq.yaml yunzai-bot:/app/Yunzai-Bot/config/config
 
       - name: install plugin dependencies
-        run: docker exec yunzai-bot sh -c "cd plugins/l-plugin/ && pnpm install"
+        run: docker exec yunzai-bot sh -c "cd /app/Yunzai-Bot/plugins/l-plugin/ && pnpm install"
 
       - name: run test script
-        run: docker exec yunzai-bot sh -c "cd plugins/l-plugin/ && pnpm run test"
+        run: docker exec yunzai-bot sh -c "cd /app/Yunzai-Bot/plugins/l-plugin/ && pnpm run test"

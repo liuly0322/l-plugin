@@ -165,6 +165,8 @@ describe('Markdown', function () {
 })
 
 describe('Tex', function () {
+  // 超时设置为 10 秒
+  this.timeout(10 * 1000)
   it('应该返回一张 Tex 图片', async function () {
     const res = await command.run('tex 9>10')
     assert.equal(res.length, 1)

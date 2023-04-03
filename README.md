@@ -34,6 +34,7 @@ L-Plugin 是一个 [Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot) V3 的功
   - 安装时不自带图片资源，每次下载完后会缓存图片在本地 `./data/tarots` 下
   - 图片使用 jsdelivr 加速，如果总是失败可以参考该功能 [原项目](https://github.com/MinatoAquaCrews/nonebot_plugin_tarot) 的 README 下载资源文件，保存在 `./data/tarots` （相对本项目安装路径）下
   - 如果有图片资源损坏也可以通过本方法手动替换文件修复
+  - 默认限制每人每群最多占卜 5 次。可以在 `data/tarotConfig.yaml` 中配置，配置完后需要重启
 - 「每日一题」LeetCode 每日一题
 - 「随机一题(easy/medium/hard)」LeetCode 随机一题
   - 如：`随机一题hard`
