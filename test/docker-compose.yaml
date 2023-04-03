@@ -2,7 +2,7 @@ version: '3.9'
 services:
   yunzai-bot:
     container_name: yunzai-bot
-    image: sirly/yunzai-bot:dev
+    image: sirly/yunzai-bot:v3
     restart: always
     volumes:
       - ./yunzai/config/:/app/Yunzai-Bot/config/config/
